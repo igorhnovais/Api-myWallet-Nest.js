@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "data" ADD COLUMN     "created" DATE DEFAULT CURRENT_TIMESTAMP;
