@@ -8,15 +8,38 @@ export class UserRepository {
 
     }
 
-    async createNewUser(userDTO: CreateUserDto){
-        return this.prisma.user.create({
-            data: userDTO
-        })
+    async create(userDTO: CreateUserDto) {
+    return this.prisma.user.create({
+        data: userDTO
+    })
     }
+    
+    async get(id: number) {
+    return this.prisma.user.findFirst({
+        where: { id }
+    })
+    }
+    
+    async getByEmail(email: string) {
+    return this.prisma.user.findFirst({
+        where: { email }
+    })
+    }
+    
+    // async getAll() {
+    // return this.prisma.user.findMany();
+    // }
+    
+    // async delete(id: number) {
+    // return this.prisma.user.delete({
+    //     where: { id }
+    // })
+    // }
 
-    async findAllMoves(id: number){
-        return this.prisma.data.findMany({
-            where: {user_id: id}
-        })
-    }
+    // async createNewUser(userDTO: CreateUserDto){
+    //     return this.prisma.user.create({
+    //         data: userDTO
+    //     })
+    // }
+
 }
