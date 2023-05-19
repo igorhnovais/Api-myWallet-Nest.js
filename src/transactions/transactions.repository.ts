@@ -24,7 +24,7 @@ export class TransactionsRepository {
     async createNewExit(price: number, user_id: number){
         return this.prisma.data.create({
             data:{
-                price,
+                price: -price,
                 status: "exit",
                 user_id
             }
