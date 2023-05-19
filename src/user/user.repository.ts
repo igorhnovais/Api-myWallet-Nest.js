@@ -4,26 +4,24 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserRepository {
-    constructor(private readonly prisma: PrismaService){
-
-    }
+    constructor(private readonly prisma: PrismaService){}
 
     async create(userDTO: CreateUserDto) {
-    return this.prisma.user.create({
-        data: userDTO
-    })
+        return this.prisma.user.create({
+            data: userDTO
+        })
     }
     
     async get(id: number) {
-    return this.prisma.user.findFirst({
-        where: { id }
-    })
+        return this.prisma.user.findFirst({
+            where: { id }
+        })
     }
     
     async getByEmail(email: string) {
-    return this.prisma.user.findFirst({
-        where: { email }
-    })
+        return this.prisma.user.findFirst({
+            where: { email }
+        })
     }
     
     // async getAll() {
