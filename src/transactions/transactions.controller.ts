@@ -21,7 +21,7 @@ export class TransactionsController {
         return "new entry created"
     }
 
-    @Post("new-entry")
+    @Post("new-exit")
     async postNewExit(@LoggedUser() user: User, @Body() newMove: CreateNewMove){
         await this.transactionsService.postNewExit(newMove.price, user.id)
         return "new exit created"
