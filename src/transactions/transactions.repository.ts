@@ -11,6 +11,16 @@ export class TransactionsRepository {
         })
     }
 
+    async findAllPrices(price: number){
+        return this.prisma.data.findMany({
+            where:{price}
+        })
+    }
+
+    async get(){
+        return this.prisma.data.findMany();
+    }
+
     async createNewEntry(price: number, user_id: number){
         return this.prisma.data.create({
             data:{
