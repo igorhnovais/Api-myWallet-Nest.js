@@ -11,9 +11,9 @@ export class TransactionsRepository {
         })
     }
 
-    async findAllPrices(price: number){
+    async findAllPrices(id: number){
         return this.prisma.data.findMany({
-            where:{price}
+            where:{id}
         })
     }
 
@@ -37,6 +37,25 @@ export class TransactionsRepository {
                 price: -price,
                 status: "exit",
                 user_id
+            }
+        })
+    }
+
+    async deleteTr(id: number){
+        return this.prisma.data.delete({
+            where:{
+                id
+            }
+        })
+    }
+
+    async putTr(id: number, price: number){
+        return this.prisma.data.update({
+            where:{
+                id
+            },
+            data:{
+                price
             }
         })
     }

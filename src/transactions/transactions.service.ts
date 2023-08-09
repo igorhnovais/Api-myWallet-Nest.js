@@ -24,4 +24,12 @@ export class TransactionsService {
     async postNewExit(price : number, id: number){
         await this.transactionsRepository.createNewExit(price, id)
     }
+
+    async deleteTr(id: number){
+        await this.transactionsRepository.deleteTr(id);
+    }
+
+    async putTr(id: number, price: number){
+        await this.transactionsRepository.putTr(id, price);
+    }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { LoggedUser } from 'src/decorators/user.decorator';
@@ -20,11 +20,11 @@ export class TransactionsController {
         return this.transactionsService.getAllMoves(1)
     }
 
-    @Get(':price')
-    async getAllPrices(@Param('price') price: string){
-        const value = Number(price);
-        console.log("oi",value)
-        return this.transactionsService.getPrices(value);
+    @Get(':id')
+    async getAllPrices(@Param('id') id: string){
+        const value = Number(id);
+        const oi = await this.transactionsService.getPrices(value);
+        return oi[0];
     }
 
     @Get("all")
@@ -32,16 +32,42 @@ export class TransactionsController {
         return this.transactionsService.get();
     }
 
+    // @Post("new-entry")
+    // async postNewEntry(@LoggedUser() user: User, @Body() newMove: CreateNewMove){
+    //     await this.transactionsService.postNewEntry(newMove.price, user.id)
+    //     return "new entry created"
+    // }
+
     @Post("new-entry")
-    async postNewEntry(@LoggedUser() user: User, @Body() newMove: CreateNewMove){
-        await this.transactionsService.postNewEntry(newMove.price, user.id)
+    async postNewEntry(@Body() newMove: CreateNewMove){
+        const user = 1;
+        await this.transactionsService.postNewEntry(newMove.price, user)
         return "new entry created"
     }
 
+    // @Post("new-exit")
+    // async postNewExit(@LoggedUser() user: User, @Body() newMove: CreateNewMove){
+    //     await this.transactionsService.postNewExit(newMove.price, user.id)
+    //     return "new exit created"
+    // }
+
     @Post("new-exit")
-    async postNewExit(@LoggedUser() user: User, @Body() newMove: CreateNewMove){
-        await this.transactionsService.postNewExit(newMove.price, user.id)
+    async postNewExit(@Body() newMove: CreateNewMove){
+        const user = 1;
+        await this.transactionsService.postNewExit(newMove.price, user)
         return "new exit created"
     }
 
+    @Delete(":id")
+    async deleteTr(@Param('id') id: string){
+        const value = Number(id);
+        await this.transactionsService.deleteTr(value);
+    }
+
+    @Put(":id")
+    async update(@Param('id') id: string, @Body() newMove: number){
+        const value = Number(id);
+        console.log("testee", newMove)
+        await this.transactionsService.putTr(value, newMove[0])
+    }
 }
