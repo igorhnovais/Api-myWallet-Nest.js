@@ -6,12 +6,10 @@ export class TransactionsRepository {
     constructor(private readonly prisma: PrismaService){}
 
     async findManyMovesByUserId(id: number){
-        console.log("oiii", id)
         const oi = await this.prisma.data.findMany({
             where:{user_id:id}
         })
 
-        console.log('res', oi)
         return oi
     }
 

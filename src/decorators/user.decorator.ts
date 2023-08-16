@@ -6,6 +6,5 @@ export const LoggedUser = createParamDecorator((data: string, context: Execution
   if (!request.user) {
     throw new NotFoundException();
   }
-  console.log("testeee", request.user)
   return request.user;
 })
