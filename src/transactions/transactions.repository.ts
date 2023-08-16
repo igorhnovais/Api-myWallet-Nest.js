@@ -5,13 +5,17 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class TransactionsRepository {
     constructor(private readonly prisma: PrismaService){}
 
-    async findManyMoves(id: number){
-        return this.prisma.data.findMany({
+    async findManyMovesByUserId(id: number){
+        console.log("oiii", id)
+        const oi = await this.prisma.data.findMany({
             where:{user_id:id}
         })
+
+        console.log('res', oi)
+        return oi
     }
 
-    async findAllPrices(id: number){
+    async findAllPricesByUserId(id: number){
         return this.prisma.data.findMany({
             where:{id}
         })
@@ -32,7 +36,7 @@ export class TransactionsRepository {
     }
 
     async createNewExit(price: number, user_id: number){
-        return this.prisma.data.create({
+        return await this.prisma.data.create({
             data:{
                 price: -price,
                 status: "exit",

@@ -5,12 +5,12 @@ import { TransactionsRepository } from './transactions.repository';
 export class TransactionsService {
     constructor(private readonly transactionsRepository: TransactionsRepository) {}
 
-    async getAllMoves(id: number){
-        return await this.transactionsRepository.findManyMoves(id)
+    async getAllMoves(id: number){ 
+        return await this.transactionsRepository.findManyMovesByUserId(id);
     }
 
     async getPrices(price: number){
-        return await this.transactionsRepository.findAllPrices(price);
+        return await this.transactionsRepository.findAllPricesByUserId(price);
     }
 
     async get(){
