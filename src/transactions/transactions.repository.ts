@@ -52,7 +52,7 @@ export class TransactionsRepository {
     }
 
     async putTr(id: number, price: number){
-        return this.prisma.data.update({
+        return await this.prisma.data.update({
             where:{
                 id
             },

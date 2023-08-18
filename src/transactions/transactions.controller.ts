@@ -46,8 +46,8 @@ export class TransactionsController {
     }
 
     @Put(":id")
-    async update(@Param('id') id: string, @Body() newMove: number){
+    async update(@Param('id') id: string, @Body() newMove: CreateNewMove){
         const value = Number(id);
-        await this.transactionsService.putTr(value, newMove[0])
+        await this.transactionsService.putTr(value, newMove.price)
     }
 }
